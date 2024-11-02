@@ -1,0 +1,89 @@
+﻿<style>
+	svg {
+		fill: #a0a0a0
+	}
+</style>
+
+<div id="kt_app_sidebar" class="app-sidebar flex-column" data-kt-drawer="true" data-kt-drawer-name="app-sidebar"
+	data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="225px"
+	data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle">
+	<!--begin::Logo-->
+	<div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
+		<!--begin::Logo image-->
+		<a href="~/home">
+			<img alt="Logo" src="~/assets/media/logos/logo-bali-line-original.png"
+				class="h-25px app-sidebar-logo-default theme-light-show" />
+			<img alt="Logo" src="~/assets/media/logos/logo-bali-line-original.png"
+				class="h-25px app-sidebar-logo-default theme-dark-show" />
+			<img alt="Logo" src="~/assets/media/logos/logo-bali-line-minimize.png"
+				class="h-20px app-sidebar-logo-minimize" />
+		</a>
+		<!--end::Logo image-->
+		<!--begin::Sidebar toggle-->
+		<!--begin::Minimized sidebar setup:
+			if (isset($_COOKIE["sidebar_minimize_state"]) && $_COOKIE["sidebar_minimize_state"] === "on") {
+				1. "src/js/layout/sidebar.js" adds "sidebar_minimize_state" cookie value to save the sidebar minimize state.
+				2. Set data-kt-app-sidebar-minimize="on" attribute for body tag.
+				3. Set data-kt-toggle-state="active" attribute to the toggle element with "kt_app_sidebar_toggle" id.
+				4. Add "active" class to to sidebar toggle element with "kt_app_sidebar_toggle" id.
+			}
+		-->
+		<div id="kt_app_sidebar_toggle"
+			class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary h-30px w-30px position-absolute top-50 start-100 translate-middle rotate"
+			data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body"
+			data-kt-toggle-name="app-sidebar-minimize">
+			<i class="ki-outline ki-black-left-line fs-3 rotate-180"></i>
+		</div>
+		<!--end::Sidebar toggle-->
+	</div>
+	<!--end::Logo-->
+	<!--begin::sidebar menu-->
+	<div class="app-sidebar-menu overflow-hidden flex-column-fluid">
+		<!--begin::Menu wrapper-->
+		<div id="kt_app_sidebar_menu_wrapper" class="app-sidebar-wrapper">
+			<!--begin::Scroll wrapper-->
+			<div id="kt_app_sidebar_menu_scroll" class="scroll-y my-5 mx-3" data-kt-scroll="true"
+				data-kt-scroll-activate="true" data-kt-scroll-height="auto"
+				data-kt-scroll-dependencies="#kt_app_sidebar_logo, #kt_app_sidebar_footer"
+				data-kt-scroll-wrappers="#kt_app_sidebar_menu" data-kt-scroll-offset="5px"
+				data-kt-scroll-save-state="true">
+				<!--begin::Menu-->
+				<div class="menu menu-column menu-rounded menu-sub-indention fw-semibold fs-6" id="#kt_app_sidebar_menu"
+					data-kt-menu="true" data-kt-menu-expand="false">
+					<!--begin:Menu item-->
+					<div class="menu-item">
+						<!--begin:Menu link-->
+						<a class="menu-link" href="~/Employees/">
+							<span class="menu-icon">
+								<i class="fa-solid fa-user-tie"></i>
+							</span>
+							<span class="menu-title">Employees</span>
+						</a>
+						<!--end:Menu link-->
+					</div>
+					<!--end:Menu item-->
+
+					<div class="menu-item">
+						<!--begin:Menu link-->
+						<a class="menu-link" href="~/Payments/">
+							<span class="menu-icon">
+								<span class="svg-icon svg-icon-2">
+									<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512">
+										<path
+											d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM64 80c0-8.8 7.2-16 16-16h64c8.8 0 16 7.2 16 16s-7.2 16-16 16H80c-8.8 0-16-7.2-16-16zm0 64c0-8.8 7.2-16 16-16h64c8.8 0 16 7.2 16 16s-7.2 16-16 16H80c-8.8 0-16-7.2-16-16zm128 72c8.8 0 16 7.2 16 16v17.3c8.5 1.2 16.7 3.1 24.1 5.1c8.5 2.3 13.6 11 11.3 19.6s-11 13.6-19.6 11.3c-11.1-3-22-5.2-32.1-5.3c-8.4-.1-17.4 1.8-23.6 5.5c-5.7 3.4-8.1 7.3-8.1 12.8c0 3.7 1.3 6.5 7.3 10.1c6.9 4.1 16.6 7.1 29.2 10.9l.5 .1 0 0 0 0c11.3 3.4 25.3 7.6 36.3 14.6c12.1 7.6 22.4 19.7 22.7 38.2c.3 19.3-9.6 33.3-22.9 41.6c-7.7 4.8-16.4 7.6-25.1 9.1V440c0 8.8-7.2 16-16 16s-16-7.2-16-16V422.2c-11.2-2.1-21.7-5.7-30.9-8.9l0 0c-2.1-.7-4.2-1.4-6.2-2.1c-8.4-2.8-12.9-11.9-10.1-20.2s11.9-12.9 20.2-10.1c2.5 .8 4.8 1.6 7.1 2.4l0 0 0 0 0 0c13.6 4.6 24.6 8.4 36.3 8.7c9.1 .3 17.9-1.7 23.7-5.3c5.1-3.2 7.9-7.3 7.8-14c-.1-4.6-1.8-7.8-7.7-11.6c-6.8-4.3-16.5-7.4-29-11.2l-1.6-.5 0 0c-11-3.3-24.3-7.3-34.8-13.7c-12-7.2-22.6-18.9-22.7-37.3c-.1-19.4 10.8-32.8 23.8-40.5c7.5-4.4 15.8-7.2 24.1-8.7V232c0-8.8 7.2-16 16-16z" />
+									</svg>
+								</span>
+							</span>
+							<span class="menu-title">Payments</span>
+						</a>
+						<!--end:Menu link-->
+					</div>
+				</div>
+				<!--end::Menu-->
+			</div>
+			<!--end::Scroll wrapper-->
+		</div>
+		<!--end::Menu wrapper-->
+	</div>
+	<!--end::sidebar menu-->
+</div>
