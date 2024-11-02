@@ -25,7 +25,7 @@ namespace emp_payment.Controllers
             {
                 if (id == null)
                 {
-                    var data = db.employees.ToList();
+                    var data = db.employees.OrderByDescending(f => f.created_date).ToList();
                     return Json(new { status = true, message = "", data });
                 }
                 else
