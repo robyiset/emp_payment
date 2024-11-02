@@ -46,13 +46,14 @@ namespace emp_payment.Controllers
         {
             try
             {
+                data.created_date = DateTime.Now;
                 db.employees.Add(data);
                 db.SaveChanges();
                 return Json(new { status = true, message = "Employee added successfully" });
             }
             catch (Exception ex)
             {
-                return Json(new { status = false, message = ex.Message });
+                return Json(new { status = false, message = ex.Message + "\n\n" + ex.StackTrace + "\n\n" + ex.InnerException });
             }
         }
         [HttpPost]
@@ -60,13 +61,14 @@ namespace emp_payment.Controllers
         {
             try
             {
+                data.update_date = DateTime.Now;
                 db.employees.Update(data);
                 db.SaveChanges();
                 return Json(new { status = true, message = "Employee added successfully" });
             }
             catch (Exception ex)
             {
-                return Json(new { status = false, message = ex.Message });
+                return Json(new { status = false, message = ex.Message + "\n\n" + ex.StackTrace + "\n\n" + ex.InnerException });
             }
         }
         [HttpPost]
@@ -87,7 +89,7 @@ namespace emp_payment.Controllers
             }
             catch (Exception ex)
             {
-                return Json(new { status = false, message = ex.Message });
+                return Json(new { status = false, message = ex.Message + "\n\n" + ex.StackTrace + "\n\n" + ex.InnerException });
             }
         }
 

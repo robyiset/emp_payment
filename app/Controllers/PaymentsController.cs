@@ -26,19 +26,19 @@ namespace emp_payment.Controllers
             {
                 if (id == null)
                 {
-                    var data = db.payrolls.OrderByDescending(f => f.created_date).ToList();
+                    var data = db.vw_employee_payroll.OrderByDescending(f => f.created_date).ToList();
                     return Json(new { status = true, message = "", data });
                 }
                 else
                 {
-                    var data = db.payrolls.Where(f => f.id == Guid.Parse(id)).FirstOrDefault();
+                    var data = db.vw_employee_payroll.Where(f => f.payroll_id == Guid.Parse(id)).FirstOrDefault();
                     return Json(new { status = true, message = "", data });
                 }
 
             }
             catch (Exception ex)
             {
-                return Json(new { status = true, message = ex.Message, data = new List<employees>() });
+                return Json(new { status = true, message = ex.Message + "\n\n" + ex.StackTrace + "\n\n" + ex.InnerException, data = new List<employees>() });
             }
         }
 
@@ -47,27 +47,59 @@ namespace emp_payment.Controllers
         {
             try
             {
+                data.created_date = DateTime.Now;
+                if (data.created_date.HasValue)
+                {
+                    data.created_date = DateTime.SpecifyKind(data.created_date.Value, DateTimeKind.Utc);
+                }
+                if (data.update_date.HasValue)
+                {
+                    data.update_date = DateTime.SpecifyKind(data.update_date.Value, DateTimeKind.Utc);
+                }
+                if (data.deleted_date.HasValue)
+                {
+                    data.deleted_date = DateTime.SpecifyKind(data.deleted_date.Value, DateTimeKind.Utc);
+                }
+                // If the period is not already in UTC, specify it
+                data.period = DateTime.SpecifyKind(data.period, DateTimeKind.Utc);
+
                 db.payrolls.Add(data);
                 db.SaveChanges();
                 return Json(new { status = true, message = "Payroll added successfully" });
             }
             catch (Exception ex)
             {
-                return Json(new { status = false, message = ex.Message });
+                return Json(new { status = false, message = ex.Message + "\n\n" + ex.StackTrace + "\n\n" + ex.InnerException });
             }
         }
+
         [HttpPost]
         public JsonResult UpdateData(payrolls data)
         {
             try
             {
+                data.update_date = DateTime.Now;
+                if (data.created_date.HasValue)
+                {
+                    data.created_date = DateTime.SpecifyKind(data.created_date.Value, DateTimeKind.Utc);
+                }
+                if (data.update_date.HasValue)
+                {
+                    data.update_date = DateTime.SpecifyKind(data.update_date.Value, DateTimeKind.Utc);
+                }
+                if (data.deleted_date.HasValue)
+                {
+                    data.deleted_date = DateTime.SpecifyKind(data.deleted_date.Value, DateTimeKind.Utc);
+                }
+                // If the period is not already in UTC, specify it
+                data.period = DateTime.SpecifyKind(data.period, DateTimeKind.Utc);
                 db.payrolls.Update(data);
                 db.SaveChanges();
                 return Json(new { status = true, message = "Payroll added successfully" });
             }
             catch (Exception ex)
             {
-                return Json(new { status = false, message = ex.Message });
+                return Json(new { status = false, message = ex.Message + "\n\n" + ex.StackTrace + "\n\n" + ex.InnerException });
             }
         }
         [HttpPost]
@@ -88,7 +120,7 @@ namespace emp_payment.Controllers
             }
             catch (Exception ex)
             {
-                return Json(new { status = false, message = ex.Message });
+                return Json(new { status = false, message = ex.Message + "\n\n" + ex.StackTrace + "\n\n" + ex.InnerException });
             }
         }
 
