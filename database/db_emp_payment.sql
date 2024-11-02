@@ -85,3 +85,109 @@ CREATE TABLE USERS (
     DELETED_BY UUID,
     DELETED_DATE TIMESTAMP
 );
+
+INSERT INTO EMPLOYEES (
+    FIRST_NAME,
+    LAST_NAME,
+    EMAIL,
+    PHONE,
+    POSITION,
+    DEPARTMENT
+) VALUES (
+    'John',
+    'Doe',
+    'john.doe@example.com',
+    '1234567890',
+    'Manager',
+    'Sales'
+),
+(
+    'Jane',
+    'Smith',
+    'jane.smith@example.com',
+    '0987654321',
+    'Engineer',
+    'IT'
+),
+(
+    'Michael',
+    'Johnson',
+    'michael.j@example.com',
+    '1234561111',
+    'Technician',
+    'Maintenance'
+),
+(
+    'Emily',
+    'Davis',
+    'emily.davis@example.com',
+    '1231231234',
+    'HR',
+    'HR'
+),
+(
+    'Daniel',
+    'Brown',
+    'daniel.b@example.com',
+    '5554443333',
+    'Accountant',
+    'Finance'
+),
+(
+    'Laura',
+    'Wilson',
+    'laura.w@example.com',
+    '3334445555',
+    'Engineer',
+    'IT'
+),
+(
+    'Robert',
+    'Moore',
+    'robert.moore@example.com',
+    '6667778888',
+    'Manager',
+    'Sales'
+),
+(
+    'Jessica',
+    'Taylor',
+    'jessica.t@example.com',
+    '8889990000',
+    'Analyst',
+    'Marketing'
+),
+(
+    'Thomas',
+    'Anderson',
+    'thomas.a@example.com',
+    '1112223333',
+    'Technician',
+    'Maintenance'
+),
+(
+    'Sophia',
+    'Martin',
+    'sophia.martin@example.com',
+    '4445556666',
+    'Manager',
+    'Finance'
+);
+
+CREATE VIEW VW_EMPLOYEE_PAYROLL AS
+    SELECT
+        P.ID           AS "payroll_id",
+        E.ID           AS "employee_id",
+        E.FIRST_NAME,
+        E.LAST_NAME,
+        E."position",
+        E.DEPARTMENT,
+        P."period",
+        P.BASIC_SALARY,
+        P.BONUS,
+        P.DEDUCTIONS,
+        P.TOTAL_SALARY
+    FROM
+        EMPLOYEES E
+        LEFT JOIN PAYROLLS P
+        ON E.ID = P.EMPLOYEE_ID;
