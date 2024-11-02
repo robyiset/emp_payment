@@ -30,7 +30,7 @@ namespace emp_payment.Controllers
                 }
                 else
                 {
-                    var data = db.employees.Where(f => f.id == Guid.Parse(id)).ToList();
+                    var data = db.employees.Where(f => f.id == Guid.Parse(id)).FirstOrDefault();
                     return Json(new { status = true, message = "", data });
                 }
 
@@ -42,13 +42,48 @@ namespace emp_payment.Controllers
         }
 
         [HttpPost]
-        public JsonResult AddData(employees newEmployee)
+        public JsonResult AddData(employees data)
         {
             try
             {
-                db.employees.Add(newEmployee);
+                db.employees.Add(data);
                 db.SaveChanges();
                 return Json(new { status = true, message = "Employee added successfully" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { status = false, message = ex.Message });
+            }
+        }
+        [HttpPost]
+        public JsonResult UpdateData(employees data)
+        {
+            try
+            {
+                db.employees.Update(data);
+                db.SaveChanges();
+                return Json(new { status = true, message = "Employee added successfully" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { status = false, message = ex.Message });
+            }
+        }
+        [HttpPost]
+        public JsonResult DeleteData(string id)
+        {
+            try
+            {
+                var employee = db.employees.FirstOrDefault(e => e.id == Guid.Parse(id));
+                if (employee == null)
+                {
+                    return Json(new { status = false, message = "Employee not found" });
+                }
+
+                db.employees.Remove(employee);
+                db.SaveChanges();
+
+                return Json(new { status = true, message = "Employee deleted successfully" });
             }
             catch (Exception ex)
             {
